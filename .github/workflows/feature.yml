@@ -56,7 +56,7 @@ jobs:
         run: |
           sfdx dxb:source:delta -m HEAD -k $(git describe --match "qa-*" --abbrev=0 --tags HEAD) -p delta_manifest
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
-          cat delta-mainfest/package.xml
+          cat delta-manifest/package.xml
       - name: Diff package from sfdx-git-packager
         run: |
           sfdx git:package --targetref $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --sourceref HEAD --outputdir git-packager --force --purge
