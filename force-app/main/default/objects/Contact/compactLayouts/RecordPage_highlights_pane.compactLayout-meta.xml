@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RecordPage_highlights_pane</fullName>
+    <fields>CaseNumber</fields>
+    <fields>CC_Case_Number_Formula__c</fields>
+    <fields>Subject</fields>
+    <fields>CreatedDate</fields>
+    <fields>CC_CriticalCaseScore__c</fields>
+    <fields>Status</fields>
+    <fields>OwnerId</fields>
+    <fields>Origin</fields>
+    <fields>CC_ContactReasonLevel4__c</fields>
+    <fields>CC_ContactReasonLevel5__c</fields>
+    <label>RecordPage highlights pane</label>
+</CompactLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<EscalationRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <escalationRule>
+        <fullName>ABCD_PSEscalateaPSCase</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <businessHours>ABCD_PSBusinesshours</businessHours>
+            <businessHoursSource>Static</businessHoursSource>
+            <escalationAction>
+                <assignedTo>ABCD_PSL2ElectricalSeating</assignedTo>
+                <assignedToType>Queue</assignedToType>
+                <minutesToEscalation>2880</minutesToEscalation>
+                <notifyCaseOwner>false</notifyCaseOwner>
+            </escalationAction>
+            <escalationStartTime>CaseCreation</escalationStartTime>
+            <formula
+      >AND(  ISPICKVAL(Type,&apos;Specifying&apos;), ISPICKVAL( Status  , &apos;Open&apos;), Subject == &apos;TEST&apos;, ISPICKVAL(CC_LOB__c , &apos;PS&apos;), IF(Value( ABCD_PSGroupId__c ) == 8 || Value(ABCD_PSGroupId__c ) == 50 , true , false), IF(Value( ABCD_PSIllustrationId__c ) &gt; 500 &amp;&amp; Value(ABCD_PSIllustrationId__c ) &lt; 1099,true,false)  )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <businessHours>ABCD_PSBusinesshours</businessHours>
+            <businessHoursSource>Static</businessHoursSource>
+            <escalationAction>
+                <assignedTo>ABCD_PSL2Powertrain</assignedTo>
+                <assignedToType>Queue</assignedToType>
+                <minutesToEscalation>2880</minutesToEscalation>
+                <notifyCaseOwner>false</notifyCaseOwner>
+            </escalationAction>
+            <escalationStartTime>CaseCreation</escalationStartTime>
+            <formula
+      >AND( ISPICKVAL(Type,&apos;Specifying&apos;), ISPICKVAL(CC_LOB__c , &apos;PS&apos;), ISPICKVAL( Status  , &apos;Open&apos;), Subject == &apos;TEST&apos;,  IF(Value(ABCD_PSGroupId__c) == 1 || Value(ABCD_PSGroupId__c) == 2 || Value(ABCD_PSGroupId__c) == 3 || Value(ABCD_PSGroupId__c) == 5 || Value(ABCD_PSGroupId__c) == 6 || Value(ABCD_PSGroupId__c) == 9 || Value(ABCD_PSGroupId__c) == 11 || Value(ABCD_PSGroupId__c) == 14 || Value(ABCD_PSGroupId__c) == 17 || Value(ABCD_PSGroupId__c) == 19 || Value(ABCD_PSGroupId__c) == 21 || Value(ABCD_PSGroupId__c) == 22 || Value(ABCD_PSGroupId__c) == 25 || Value(ABCD_PSGroupId__c) == 45 , true , false) )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <businessHours>ABCD_PSBusinesshours</businessHours>
+            <businessHoursSource>Static</businessHoursSource>
+            <escalationAction>
+                <assignedTo>ABCD_PSL2InteriorExterior</assignedTo>
+                <assignedToType>Queue</assignedToType>
+                <minutesToEscalation>2880</minutesToEscalation>
+                <notifyCaseOwner>false</notifyCaseOwner>
+            </escalationAction>
+            <escalationStartTime>CaseCreation</escalationStartTime>
+            <formula
+      >AND(  ISPICKVAL(CC_LOB__c , &apos;PS&apos;),   ISPICKVAL(Type,&apos;Specifying&apos;),  ISPICKVAL( Status  , &apos;Open&apos;), Subject == &apos;TEST&apos;,  IF(Value(ABCD_PSGroupId__c) == 7 || Value(ABCD_PSGroupId__c) == 10 || Value(ABCD_PSGroupId__c) == 13 || Value(ABCD_PSGroupId__c) == 24 || Value(ABCD_PSGroupId__c) == 26 || Value(ABCD_PSGroupId__c) == 27 || Value(ABCD_PSGroupId__c) == 30 || Value(ABCD_PSGroupId__c) == 40 || Value(ABCD_PSGroupId__c) == 60 || Value(ABCD_PSGroupId__c) == 50 || Value(ABCD_PSGroupId__c) &gt; 51 , true , false),  IF(((Value(ABCD_PSIllustrationId__c  ) &gt; 0 &amp;&amp; Value(ABCD_PSIllustrationId__c  )&lt;499) ||(Value(ABCD_PSIllustrationId__c  ) &gt; 1300 &amp;&amp; Value(ABCD_PSIllustrationId__c  )&lt; 1799)),true,false ))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <businessHours>ABCD_PSBusinesshours</businessHours>
+            <businessHoursSource>Static</businessHoursSource>
+            <escalationAction>
+                <assignedTo>ABCD_PSL2FIAT</assignedTo>
+                <assignedToType>Queue</assignedToType>
+                <minutesToEscalation>2880</minutesToEscalation>
+                <notifyCaseOwner>false</notifyCaseOwner>
+            </escalationAction>
+            <escalationStartTime>CaseCreation</escalationStartTime>
+            <formula
+      >AND( ISPICKVAL(CC_LOB__c , &apos;PS&apos;), ISPICKVAL(Type,&apos;Specifying&apos;), ISPICKVAL( Status  , &apos;Open&apos;), Subject == &apos;TEST&apos;, OR( ISPICKVAL( Asset.CC_Brand__c ,&apos;Fiat&apos;),  IF((ABCD_Family__c == &apos;4C&apos; ||ABCD_Family__c == &apos;BA&apos; || ABCD_Family__c == &apos;BF&apos; || ABCD_Family__c == &apos;BG&apos; ||ABCD_Family__c == &apos;BU&apos;||ABCD_Family__c == &apos;B1&apos; || ABCD_Family__c == &apos;BV&apos; || ABCD_Family__c == &apos;BQ&apos; ||ABCD_Family__c == &apos;FB&apos; || ABCD_Family__c == &apos;GA&apos; ||ABCD_Family__c == &apos;VF&apos; || ABCD_Family__c == &apos;VM&apos; || ABCD_Family__c == &apos;GU&apos; || ABCD_Family__c == &apos;PD&apos; || ABCD_Family__c == &apos;FD&apos;),true,false)  )  )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <businessHours>ABCD_PSBusinesshours</businessHours>
+            <businessHoursSource>Static</businessHoursSource>
+            <escalationAction>
+                <assignedTo>ABCD_PSSpecifyingCatchallL2</assignedTo>
+                <assignedToType>Queue</assignedToType>
+                <minutesToEscalation>2880</minutesToEscalation>
+                <notifyCaseOwner>false</notifyCaseOwner>
+            </escalationAction>
+            <escalationStartTime>CaseCreation</escalationStartTime>
+            <formula
+      >AND(  ISPICKVAL(CC_LOB__c , &apos;PS&apos;), ISPICKVAL(Type,&apos;Specifying&apos;), ISPICKVAL( Status  , &apos;Open&apos;), Subject == &apos;TEST&apos;,   NOT ( OR (   AND(  ISPICKVAL(Type,&apos;Specifying&apos;),  ISPICKVAL(CC_LOB__c , &apos;PS&apos;),  ISPICKVAL( Status  , &apos;Open&apos;), RIGHT(Owner:User.UserRole.DeveloperName, 6) == &apos;Level1&apos;, IF(Value( ABCD_PSGroupId__c ) == 8 || Value(ABCD_PSGroupId__c ) == 50 , true , false),  IF(Value( ABCD_PSIllustrationId__c ) &gt; 500 &amp;&amp; Value(ABCD_PSIllustrationId__c ) &lt; 1099,true,false)    ),   AND(  ISPICKVAL(Type,&apos;Specifying&apos;),  ISPICKVAL(CC_LOB__c , &apos;PS&apos;), ISPICKVAL( Status  , &apos;Open&apos;), RIGHT(Owner:User.UserRole.DeveloperName, 6) == &apos;Level1&apos;, IF(Value(ABCD_PSGroupId__c) == 1 || Value(ABCD_PSGroupId__c) == 2 || Value(ABCD_PSGroupId__c) == 3 || Value(ABCD_PSGroupId__c) == 5 || Value(ABCD_PSGroupId__c) == 6 || Value(ABCD_PSGroupId__c) == 9 || Value(ABCD_PSGroupId__c) == 11 || Value(ABCD_PSGroupId__c) == 14 || Value(ABCD_PSGroupId__c) == 17 || Value(ABCD_PSGroupId__c) == 19 || Value(ABCD_PSGroupId__c) == 21 || Value(ABCD_PSGroupId__c) == 22 || Value(ABCD_PSGroupId__c) == 25 || Value(ABCD_PSGroupId__c) == 45 , true , false) ),   AND(  ISPICKVAL(CC_LOB__c , &apos;PS&apos;),   ISPICKVAL(Type,&apos;Specifying&apos;), ISPICKVAL( Status  , &apos;Open&apos;), RIGHT(Owner:User.UserRole.DeveloperName, 6) == &apos;Level1&apos;,  IF(Value(ABCD_PSGroupId__c) == 7 || Value(ABCD_PSGroupId__c) == 10 || Value(ABCD_PSGroupId__c) == 13 || Value(ABCD_PSGroupId__c) == 24 || Value(ABCD_PSGroupId__c) == 26 || Value(ABCD_PSGroupId__c) == 27 || Value(ABCD_PSGroupId__c) == 30 || Value(ABCD_PSGroupId__c) == 40 || Value(ABCD_PSGroupId__c) == 60 || Value(ABCD_PSGroupId__c) == 50 || Value(ABCD_PSGroupId__c) &gt; 51 , true , false),   IF(((Value(ABCD_PSIllustrationId__c ) &gt; 0 &amp;&amp; Value(ABCD_PSIllustrationId__c )&lt;499) ||(Value(ABCD_PSIllustrationId__c ) &gt; 1300 &amp;&amp; Value(ABCD_PSIllustrationId__c )&lt; 1799)),true,false )  ),  AND( ISPICKVAL(CC_LOB__c , &apos;PS&apos;), ISPICKVAL(Type,&apos;Specifying&apos;), ISPICKVAL( Status  , &apos;Open&apos;), RIGHT(Owner:User.UserRole.DeveloperName, 6) == &apos;Level1&apos;, OR( ISPICKVAL( Asset.CC_Brand__c ,&apos;Fiat&apos;),  IF((ABCD_Family__c == &apos;4C&apos; ||ABCD_Family__c == &apos;BA&apos; || ABCD_Family__c == &apos;BF&apos; || ABCD_Family__c == &apos;BG&apos; ||ABCD_Family__c == &apos;BU&apos;||ABCD_Family__c == &apos;B1&apos; || ABCD_Family__c == &apos;BV&apos; || ABCD_Family__c == &apos;BQ&apos; ||ABCD_Family__c == &apos;FB&apos; || ABCD_Family__c == &apos;GA&apos; ||ABCD_Family__c == &apos;VF&apos; || ABCD_Family__c == &apos;VM&apos; || ABCD_Family__c == &apos;GU&apos; || ABCD_Family__c == &apos;PD&apos; || ABCD_Family__c == &apos;FD&apos;),true,false)  )  )   )  )  )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <businessHours>ABCD_PSBusinesshours</businessHours>
+            <businessHoursSource>Static</businessHoursSource>
+            <escalationAction>
+                <assignedTo>ABCD_PSPerftech</assignedTo>
+                <assignedToType>Queue</assignedToType>
+                <minutesToEscalation>2880</minutesToEscalation>
+                <notifyCaseOwner>false</notifyCaseOwner>
+            </escalationAction>
+            <escalationStartTime>CaseCreation</escalationStartTime>
+            <formula
+      >AND( ISPICKVAL(CC_LOB__c  , &apos;PS&apos;), ISPICKVAL( Status  , &apos;Open&apos;), Subject == &apos;TEST&apos;, ISPICKVAL(Type  , &apos;Performance/Accessories Technical&apos;))</formula>
+        </ruleEntry>
+    </escalationRule>
+</EscalationRules>

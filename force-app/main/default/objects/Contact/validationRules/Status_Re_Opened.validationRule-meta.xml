@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Re_Opened</fullName>
+    <active>true</active>
+    <description
+  >Status of re-opened case can only be set to &apos;Open&apos;.</description>
+    <errorConditionFormula>AND( 
+$Setup.CC_Global_OnOff_Switch__c.Is_ValidationRule_Active__c, 
+ISCHANGED(Status), 
+NOT(ISPICKVAL(Status, &quot;Open&quot;)), 
+ISPICKVAL(PRIORVALUE(Status),&quot;Closed&quot;), 
+NOT(ISBLANK(ClosedDate)), 
+Today() - DATEVALUE(ClosedDate) &lt;= VALUE( $Label.CC_Number_Of_Days) ,
+NOT(ISPICKVAL( Origin , &quot;Chat&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage
+  >Status of re-opened case can only be set to &apos;Open&apos;.</errorMessage>
+</ValidationRule>

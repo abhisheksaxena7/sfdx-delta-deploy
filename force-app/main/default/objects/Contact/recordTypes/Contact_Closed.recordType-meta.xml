@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <businessProcess>Customer Care</businessProcess>
+    <fullName>Contact_Closed</fullName>
+    <label>Contact Closed</label>
+    <picklistValues>
+        <values>
+            <fullName>Unsolicited Customer feedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Updated%2FProvided requested information</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ContactSuspensionReason__c</picklist>
+        <values>
+            <fullName>Mobile App Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting for Firmware Update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting for attorney- Customer response</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName
+      >Waiting on Customer Action - Customer to check if issue resolved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting on Customer Action - Decision on Offer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting on Customer Action - Documentation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting on Customer Action - Repair Appointment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting on Dealer appointment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>
