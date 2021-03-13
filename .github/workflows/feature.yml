@@ -51,16 +51,6 @@ jobs:
           sfdx dxb:source:delta -m HEAD -k $(git describe --match "qa-*" --abbrev=0 --tags HEAD) -p delta_manifest
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
           cat delta_manifest/package.xml
-      - name: Diff package from sfpowerkit
-        run: |
-          sfdx sfpowerkit:project:diff --revisionfrom $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --revisionto HEAD --generatedestructive --output sfpowerkit
-          cd sfpowerkit
-          sfdx force:source:convert -d src
-          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
-          cat src/package.xml
-          echo "--- destructiveChanges.xml generated with deleted metadata ---"
-          cat destructiveChanges.xml
-          cd ..
       - name: Diff package from sfdx-git-packager
         run: |
           sfdx git:package --targetref $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --sourceref HEAD --outputdir git-packager --force --purge
@@ -68,3 +58,13 @@ jobs:
           cat git-packager/package.xml
           echo "--- destructiveChanges.xml generated with deleted metadata ---"
           cat git-packager/destructiveChanges.xml
+      - name: Diff package from sfpowerkit
+        run: |
+          sfdx sfpowerkit:project:diff --revisionfrom $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --revisionto HEAD --generatedestructive --output sfpowerkit
+          cd sfpowerkit
+          echo "--- destructiveChanges.xml generated with deleted metadata ---"
+          cat destructiveChanges.xml
+          sfdx force:source:convert -d src
+          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
+          cat src/package.xml
+          cd ..
