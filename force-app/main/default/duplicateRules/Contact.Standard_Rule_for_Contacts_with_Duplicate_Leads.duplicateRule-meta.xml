@@ -26,10 +26,6 @@
                 <outputField>Phone</outputField>
             </mappingFields>
             <mappingFields>
-                <inputField>Email</inputField>
-                <outputField>Email</outputField>
-            </mappingFields>
-            <mappingFields>
                 <inputField>MailingCity</inputField>
                 <outputField>City</outputField>
             </mappingFields>

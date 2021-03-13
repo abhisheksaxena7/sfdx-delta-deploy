@@ -7,11 +7,6 @@
             <assignedTo>abhisheksaxena2.12@brave-raccoon-a06udo.com</assignedTo>
             <assignedToType>User</assignedToType>
             <criteriaItems>
-                <field>Account.BillingCountry</field>
-                <operation>equals</operation>
-                <value>US,USA,United States,United States of America</value>
-            </criteriaItems>
-            <criteriaItems>
                 <field>Account.SLA__c</field>
                 <operation>equals</operation>
                 <value>Gold,Platinum</value>

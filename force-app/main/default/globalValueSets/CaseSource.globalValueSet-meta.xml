@@ -6,11 +6,6 @@
         <label>Customer</label>
     </customValue>
     <customValue>
-        <fullName>Dealer</fullName>
-        <default>false</default>
-        <label>Dealer</label>
-    </customValue>
-    <customValue>
         <fullName>Top Management</fullName>
         <default>false</default>
         <label>Top Management</label>

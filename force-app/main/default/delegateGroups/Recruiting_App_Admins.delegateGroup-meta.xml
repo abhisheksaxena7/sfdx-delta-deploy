@@ -2,4 +2,5 @@
 <DelegateGroup xmlns="http://soap.sforce.com/2006/04/metadata">
     <label>Recruiting App Admins</label>
     <loginAccess>true</loginAccess>
+    <!-- -->
 </DelegateGroup>

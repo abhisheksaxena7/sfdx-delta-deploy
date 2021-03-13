@@ -9,10 +9,6 @@
             <fullName>Unsolicited Customer feedback</fullName>
             <default>false</default>
         </values>
-        <values>
-            <fullName>Updated%2FProvided requested information</fullName>
-            <default>false</default>
-        </values>
     </picklistValues>
     <picklistValues>
         <picklist>ContactSuspensionReason__c</picklist>

@@ -3,10 +3,6 @@
     <active>true</active>
     <dataCategory>
         <dataCategory>
-            <label>All Brands</label>
-            <name>All_Brands</name>
-        </dataCategory>
-        <dataCategory>
             <label>Chrysler</label>
             <name>Chrysler</name>
         </dataCategory>
