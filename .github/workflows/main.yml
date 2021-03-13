@@ -33,6 +33,9 @@ jobs:
         run: |
           git fetch --tags
           git tag
+          sfdx sgd:source:delta --from prod-start --to HEAD --output .
+          echo "--- package.xml generated with added and modified metadata ---"
+          cat package/package.xml
       - name: create tag
         run: |
           remoteURL=$(https://$GIT_USERNAME:$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git)
