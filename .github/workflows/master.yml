@@ -1,0 +1,34 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Master Branch Workflow
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [master]
+    # Only trigger a workflow when changes have been made to files in the below mentioned path.
+    paths:
+      - "force-app/**"
+env:
+  SF_ORG__AUTH_URL: ${{ secrets.SF_ORG__AUTH_URL }}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  Deploy_To_Org:
+    runs-on: ubuntu-latest
+    container:
+      image: abhisheksaxena7/sfdx-git-delta:latest
+      options: --user 0:0
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Authorize Playground
+        run: |
+          echo $SF_ORG__AUTH_URL > authURLFile
+          sfdx force:auth:sfdxurl:store -f authURLFile -s -a LWC
+      - name: Diff
+        run: |
+          sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
+          echo "--- package.xml generated with added and modified metadata ---"
+          cat package/package.xml
