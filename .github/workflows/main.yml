@@ -24,6 +24,7 @@ jobs:
       options: --user 0:0 --privileged
     steps:
       - uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow --tags
 
       - name: Authorize Org
         run: |
@@ -33,10 +34,7 @@ jobs:
         run: echo y | sfdx plugins:install sfdx-git-delta
       - name: Create Package
         run: |
-          git fetch --prune --unshallow
-          git fetch --tags
-          prod-latest-tag=$(git describe --match "prod-*" --abbrev=0 --tags HEAD)
-          sfdx sgd:source:delta --from $prod-latest-tag --to HEAD --output .
+          sfdx sgd:source:delta --from prod-123 --to HEAD --output .
           echo "--- package.xml generated with added and modified metadata ---"
           cat package/package.xml
       - name: create tag
