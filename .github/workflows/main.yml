@@ -34,7 +34,7 @@ jobs:
         run: echo y | sfdx plugins:install sfdx-git-delta
       - name: Create Package
         run: |
-          sfdx sgd:source:delta --from prod-123 --to HEAD --output .
+          sfdx sgd:source:delta --from $(git describe --match "prod-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata ---"
           cat package/package.xml
       - name: create tag
