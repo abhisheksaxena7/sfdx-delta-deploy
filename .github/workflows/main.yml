@@ -33,6 +33,7 @@ jobs:
         run: echo y | sfdx plugins:install sfdx-git-delta
       - name: Create Package
         run: |
+          git fetch --tags
           git tag
           prod-latest-tag=$(git describe --match "prod-*" --abbrev=0 --tags HEAD)
           sfdx sgd:source:delta --from $prod-latest-tag --to HEAD --output .
