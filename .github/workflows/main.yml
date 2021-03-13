@@ -39,7 +39,7 @@ jobs:
           cat package/package.xml
       - name: create tag
         run: |
-          remoteURL=$(https://$GIT_USERNAME:$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git)
+          remoteURL=$(https://$GIT_USERNAME:$GIT_TOKEN@github.com/abhisheksaxena7/sfdx-delta-deploy.git)
           git remote remove origin
           git remote add origin $remoteURL
           timestamp=$(date +"%Y%m%d%H%M%S")
