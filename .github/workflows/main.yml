@@ -8,12 +8,10 @@ on:
   push:
     branches: [main]
     # Only trigger a workflow when changes have been made to files in the below mentioned path.
-    #paths:
-    #  - "force-app/**"
+    paths:
+      - "force-app/**"
 env:
   SF_PROD_ORG__AUTH_URL: ${{ secrets.SF_PROD_ORG__AUTH_URL }}
-  GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-  GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
