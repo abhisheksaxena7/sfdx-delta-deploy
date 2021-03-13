@@ -33,13 +33,26 @@ jobs:
         run: |
           echo $SF_QA_ORG__AUTH_URL > authURLFile
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a QA
-      - name: Install all plugins
-        run: echo y | sfdx plugins:install sfdx-git-delta
-      - name: Differential Deployment
+      - name: Install different git diff plugins
         run: |
-          sfdx --help
-          sfdx plugins
+          echo y | sfdx plugins:install sfdx-git-delta
+          echo y | sfdx plugins:install sfdx-git-packager
+          echo y | sfdx plugins:install sfpowerkit
+      - name: Diff package from sfdx-git-delta
+        run: |
           sfdx sgd:source:delta --from $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
           cat package/package.xml
-          sfdx force:source:deploy -x package/package.xml --checkonly
+      - name: Diff package from sfdx-git-packager
+        run: |
+          sfdx git:package --targetref $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --sourceref HEAD --outputdir git-packager --force --purge
+          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
+          cat git-packager/package.xml
+      - name: Diff package from sfpowerkit
+        run: |
+          sfdx sfpowerkit:project:diff --revisionfrom $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --revisionto HEAD --output sfpowerkit
+          cd sfpowerkit
+          sfdx force:source:convert -d src
+          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
+          cat src/package.xml
+          cd ..
