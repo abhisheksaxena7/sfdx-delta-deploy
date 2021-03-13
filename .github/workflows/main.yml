@@ -32,7 +32,6 @@ jobs:
       - name: Generate Diff
         run: |
           git fetch --tags
-          git tags
           prod-latest-tag=$(git describe --match "prod-*" --abbrev=0 --tags HEAD)
           sfdx sgd:source:delta --from $prod-latest-tag --to HEAD --output .
           echo "--- package.xml generated with added and modified metadata ---"
