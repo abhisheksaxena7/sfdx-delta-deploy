@@ -8,5 +8,6 @@ public with sharing class AccountController {
       ORDER BY Name
     ];
     // throw new AuraHandledException('Forced error');
+    // A comment
   }
 }
