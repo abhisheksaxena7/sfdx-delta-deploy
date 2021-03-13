@@ -8,8 +8,8 @@ on:
   push:
     branches: [main]
     # Only trigger a workflow when changes have been made to files in the below mentioned path.
-    paths:
-      - "force-app/**"
+    #paths:
+    #  - "force-app/**"
 env:
   SF_PROD_ORG__AUTH_URL: ${{ secrets.SF_PROD_ORG__AUTH_URL }}
   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
@@ -31,6 +31,8 @@ jobs:
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a PROD
       - name: Generate Diff
         run: |
+          git fetch --tags
+          git tags
           prod-latest-tag=$(git describe --match "prod-*" --abbrev=0 --tags HEAD)
           sfdx sgd:source:delta --from $prod-latest-tag --to HEAD --output .
           echo "--- package.xml generated with added and modified metadata ---"
