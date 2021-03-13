@@ -10,4 +10,4 @@ package.xml
 
 # LWC Jest
 **/__tests__/**
-**/workflows/master.yml
+**/workflows/main.yml
