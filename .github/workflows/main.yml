@@ -21,19 +21,20 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: abhisheksaxena7/sfdx-git-delta:latest
-      options: --user 0:0
+      options: --user 0:0 --privileged
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Authorize Org
         run: |
           echo $SF_PROD_ORG__AUTH_URL > authURLFile
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a PROD
-      - name: Generate Diff
+      - name: Install SGD
+        run: echo y | sfdx plugins:install sfdx-git-delta
+      - name: Create Package
         run: |
-          git fetch --tags
-          git tag
-          sfdx sgd:source:delta --from prod-start --to HEAD --output .
+          prod-latest-tag=$(git describe --match "prod-*" --abbrev=0 --tags HEAD)
+          sfdx sgd:source:delta --from $prod-latest-tag --to HEAD --output .
           echo "--- package.xml generated with added and modified metadata ---"
           cat package/package.xml
       - name: create tag
