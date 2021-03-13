@@ -32,11 +32,12 @@ jobs:
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a PROD
       - name: Install SGD
         run: echo y | sfdx plugins:install sfdx-git-delta
-      - name: Create Package
+      - name: Differential Deployment
         run: |
           sfdx sgd:source:delta --from $(git describe --match "prod-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata ---"
           cat package/package.xml
+          sfdx force:source:deploy -x package/package.xml
       - name: create tag
         run: |
           git tag prod-$(date +"%Y%m%d%H%M%S")
