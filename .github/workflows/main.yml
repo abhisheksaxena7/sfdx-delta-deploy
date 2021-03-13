@@ -32,9 +32,8 @@ jobs:
         run: echo y | sfdx plugins:install sfdx-git-delta
       - name: Differential Deployment
         run: |
-          echo 'LAST_TAG='$(git describe --match "prod-*" --abbrev=0 --tags HEAD) >> $GITHUB_ENV
-          sfdx sgd:source:delta --from ${{env.LAST_TAG}} --to HEAD --output . --ignore .forceignore
-          echo "--- package.xml generated with added and modified metadata from ${{env.LAST_TAG}}---"
+          sfdx sgd:source:delta --from $(git describe --match "prod-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
+          echo "--- package.xml generated with added and modified metadata from $(git describe --match "prod-*" --abbrev=0 --tags HEAD)---"
           cat package/package.xml
           sfdx force:source:deploy -x package/package.xml
       - name: create tag
