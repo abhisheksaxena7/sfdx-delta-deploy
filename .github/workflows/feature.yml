@@ -57,7 +57,7 @@ jobs:
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
           cat git-packager/package.xml
           echo "--- destructiveChanges.xml generated with deleted metadata ---"
-          cat git-packager/destructiveChanges.xml
+          cat git-packager/destructiveChangesPost.xml
       - name: Diff package from sfpowerkit
         run: |
           sfdx sfpowerkit:project:diff --revisionfrom $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --revisionto HEAD --generatedestructive --output sfpowerkit
