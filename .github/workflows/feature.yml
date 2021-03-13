@@ -8,8 +8,8 @@ on:
   push:
     branches: [feature/**]
     # Only trigger a workflow when changes have been made to files in the below mentioned path.
-    paths:
-      - "force-app/**"
+    #paths:
+    #  - "force-app/**"
 env:
   SF_QA_ORG__AUTH_URL: ${{ secrets.SF_QA_ORG__AUTH_URL }}
 
