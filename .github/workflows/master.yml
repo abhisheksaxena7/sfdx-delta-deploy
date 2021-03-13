@@ -11,7 +11,9 @@ on:
     paths:
       - "force-app/**"
 env:
-  SF_ORG__AUTH_URL: ${{ secrets.SF_ORG__AUTH_URL }}
+  SF_PROD_ORG__AUTH_URL: ${{ secrets.SF_PROD_ORG__AUTH_URL }}
+  GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+  GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -23,13 +25,21 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Authorize Playground
+      - name: Authorize Org
         run: |
-          echo $SF_ORG__AUTH_URL > authURLFile
-          sfdx force:auth:sfdxurl:store -f authURLFile -s -a LWC
-      - name: Diff
+          echo $SF_PROD_ORG__AUTH_URL > authURLFile
+          sfdx force:auth:sfdxurl:store -f authURLFile -s -a PROD
+      - name: Generate Diff
         run: |
-          qa-latest-tag=$(git describe --match "qa-*" --abbrev=0 --tags HEAD)
-          sfdx sgd:source:delta --from $qa-latest-tag --to HEAD --output .
+          prod-latest-tag=$(git describe --match "prod-*" --abbrev=0 --tags HEAD)
+          sfdx sgd:source:delta --from $prod-latest-tag --to HEAD --output .
           echo "--- package.xml generated with added and modified metadata ---"
           cat package/package.xml
+      - name: create tag
+        run: |
+          remoteURL=$(https://$GIT_USERNAME:$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git)
+          git remote remove origin
+          git remote add origin $remoteURL
+          timestamp=$(date +"%Y%m%d%H%M%S")
+          git tag $timestamp
+          git push --tags
