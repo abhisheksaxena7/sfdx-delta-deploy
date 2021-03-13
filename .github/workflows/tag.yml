@@ -6,10 +6,8 @@ name: Run on push of Tags
 # events but only for the main branch
 on:
   push:
-    branches: [v[0-9]+.[0-9]+.[0-9]+]
-    # Only trigger a workflow when changes have been made to files in the below mentioned path.
-    paths:
-      - "force-app/**"
+    branches: "[v[0-9]+.[0-9]+.[0-9]+]"
+
 env:
   SF_QA_PROD__AUTH_URL: ${{ secrets.SF_QA_ORG__AUTH_URL }}
 
