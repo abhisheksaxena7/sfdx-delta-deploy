@@ -29,6 +29,7 @@ jobs:
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a LWC
       - name: Diff
         run: |
-          sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
+          qa-latest-tag=$(git describe --match "qa-*" --abbrev=0 --tags HEAD)
+          sfdx sgd:source:delta --from $qa-latest-tag --to HEAD --output .
           echo "--- package.xml generated with added and modified metadata ---"
           cat package/package.xml
