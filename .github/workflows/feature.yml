@@ -44,6 +44,16 @@ jobs:
           sfdx sgd:source:delta --from $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
           cat package/package.xml
+      - name: Diff package from DXB
+        run: |
+          sfdx dxb:source:delta -m HEAD -k $(git describe --match "qa-*" --abbrev=0 --tags HEAD) -p delta_manifest
+          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
+          cat delta_manifest/package.xml
+      - name: Diff package from sfdx-git-packager
+        run: |
+          sfdx git:package --targetref $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --sourceref HEAD --outputdir git-packager --force --purge
+          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
+          cat git-packager/package.xml
       - name: Diff package from sfpowerkit
         run: |
           sfdx sfpowerkit:project:diff --revisionfrom $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --revisionto HEAD --output sfpowerkit
@@ -52,13 +62,3 @@ jobs:
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
           cat src/package.xml
           cd ..
-      - name: Diff package from DXB
-        run: |
-          sfdx dxb:source:delta -m HEAD -k $(git describe --match "qa-*" --abbrev=0 --tags HEAD) -p delta_manifest
-          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
-          cat delta-manifest/package.xml
-      - name: Diff package from sfdx-git-packager
-        run: |
-          sfdx git:package --targetref $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --sourceref HEAD --outputdir git-packager --force --purge
-          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
-          cat git-packager/package.xml
