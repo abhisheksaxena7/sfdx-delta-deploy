@@ -34,6 +34,7 @@ jobs:
           echo $SF_QA_ORG__AUTH_URL > authURLFile
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a QA
 
+      - name: Diff package from sfdx-git-delta
         run: |
           sfdx sgd:source:delta --from $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
