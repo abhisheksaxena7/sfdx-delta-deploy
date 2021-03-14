@@ -34,8 +34,7 @@ jobs:
         run: |
           echo $SF_UAT_ORG__AUTH_URL > authURLFile
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a UAT
-      - name: Install SGD
-        run: echo y | sfdx plugins:install sfdx-git-delta
+
       - name: Differential Deployment
         run: |
           sfdx sgd:source:delta --from $(git describe --match "uat-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
@@ -61,8 +60,7 @@ jobs:
         run: |
           echo $SF_PROD_ORG__AUTH_URL > authURLFile
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a PROD
-      - name: Install SGD
-        run: echo y | sfdx plugins:install sfdx-git-delta
+
       - name: Differential Deployment
         run: |
           sfdx sgd:source:delta --from $(git describe --match "prod-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
