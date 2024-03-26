@@ -23,7 +23,7 @@ jobs:
     #Choose the docker image from which the container should be created
     container:
       image: abhisheksaxena7/sfdx-git-delta:2.33
-      options: --user 0:0 --privileged
+      options: --user 1001 --privileged
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: abhisheksaxena7/sfdx-git-delta:2.33
-      options: --user 0:0 --privileged
+      options: --user 1001 --privileged
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

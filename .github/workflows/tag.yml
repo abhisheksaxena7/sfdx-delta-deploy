@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: abhisheksaxena7/sfdx-git-delta:2.33
-      options: --user 0:0 --privileged
+      options: --user 1001 --privileged
     steps:
       - uses: actions/checkout@v4
       - run: git fetch --prune --unshallow --tags
