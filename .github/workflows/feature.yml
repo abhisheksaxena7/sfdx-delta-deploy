@@ -26,11 +26,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - run: git fetch --prune --unshallow --tags
+      - uses: actions/checkout@v4
+      - run: sudo git config --system --add safe.directory '*'
 
       - name: Authorize Org
         run: |
+          git fetch --prune --unshallow --tags
           echo $SF_QA_ORG__AUTH_URL > authURLFile
           sfdx force:auth:sfdxurl:store -f authURLFile -s -a QA
 
