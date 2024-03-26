@@ -27,7 +27,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      - run: sudo git config --system --add safe.directory '*'
+      - run: git config --system --add safe.directory '*'
 
       - name: Authorize Org
         run: |
