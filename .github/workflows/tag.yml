@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: abhisheksaxena7/sfdx-git-delta:2.33
-      options: --user 1000 --privileged
+      options: --user 0:0 --privileged
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow --tags
 
       - name: Authorize Org
