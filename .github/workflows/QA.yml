@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     #Choose the docker image from which the container should be created
     container:
-      image: abhisheksaxena7/sfdx-git-delta:latest
+      image: abhisheksaxena7/sfdx-git-delta:2.33
       options: --user 0:0 --privileged
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -50,7 +50,7 @@ jobs:
     needs: [Deploy_To_QA]
     runs-on: ubuntu-latest
     container:
-      image: abhisheksaxena7/sfdx-git-delta:latest
+      image: abhisheksaxena7/sfdx-git-delta:2.33
       options: --user 0:0 --privileged
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

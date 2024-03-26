@@ -17,7 +17,7 @@ jobs:
   Deploy_To_PROD:
     runs-on: ubuntu-latest
     container:
-      image: abhisheksaxena7/sfdx-git-delta:latest
+      image: abhisheksaxena7/sfdx-git-delta:2.33
       options: --user 0:0 --privileged
     steps:
       - uses: actions/checkout@v2
