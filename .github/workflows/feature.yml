@@ -38,4 +38,7 @@ jobs:
 
       - name: Differential Deployment
         run: |
-          sf plugins
+          sf sgd source delta --from $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
+          echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
+          cat package/package.xml
+          sf project deploy start --manifest package/package.xml --dry-run
