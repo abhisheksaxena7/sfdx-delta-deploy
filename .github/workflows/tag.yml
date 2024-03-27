@@ -17,7 +17,7 @@ jobs:
   Deploy_To_PROD:
     runs-on: ubuntu-latest
     container:
-      image: abhisheksaxena7/sfdx-git-delta:latest
+      image: abhisheksaxena7/sfdx-git-delta:2.33
       options: --user 0:0 --privileged
     steps:
       - uses: actions/checkout@v2
@@ -30,10 +30,10 @@ jobs:
 
       - name: Differential Deployment
         run: |
-          sfdx sgd:source:delta --from $(git describe --match "prod-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
+          sf sgd source delta --from $(git describe --match "prod-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "prod-*" --abbrev=0 --tags HEAD)---"
           cat package/package.xml
-          sfdx force:source:deploy -x package/package.xml --testlevel NoTestRun
+          sf project deploy start --manifest package/package.xml --test-level NoTestRun
       - name: create tag
         run: |
           git tag prod-$(date +"%Y%m%d%H%M%S")

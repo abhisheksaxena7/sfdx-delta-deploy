@@ -21,13 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     #Choose the docker image from which the container should be created
     container:
-      image: abhisheksaxena7/sfdx-git-delta:latest
+      image: abhisheksaxena7/sfdx-git-delta:2.33
       options: --user 0:0 --privileged
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - run: git fetch --prune --unshallow --tags
+      - uses: actions/checkout@v4
+      - run: |
+            git config --system --add safe.directory '*'
+            git fetch --prune --unshallow --tags
 
       - name: Authorize Org
         run: |
@@ -36,7 +38,7 @@ jobs:
 
       - name: Differential Deployment
         run: |
-          sfdx sgd:source:delta --from $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
+          sf sgd source delta --from $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
           cat package/package.xml
-          sfdx force:source:deploy -x package/package.xml --checkonly
+          sf project deploy start --manifest package/package.xml --dry-run
