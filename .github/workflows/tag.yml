@@ -10,7 +10,7 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
 env:
-  SF_PROD__AUTH_URL: ${{ secrets.SF_PROD_ORG__AUTH_URL }}
+  SF_PROD_ORG__AUTH_URL: ${{ secrets.SF_PROD_ORG__AUTH_URL }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
