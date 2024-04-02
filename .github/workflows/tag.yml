@@ -35,7 +35,7 @@ jobs:
           sf sgd source delta --from $(git describe --match "prod-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "prod-*" --abbrev=0 --tags HEAD)---"
           cat package/package.xml
-          sf project deploy start --manifest package/package.xml --test-level NoTestRun
+          sf project deploy start --ignore-conflicts --manifest package/package.xml --test-level NoTestRun
       - name: create tag
         run: |
           git tag prod-$(date +"%Y%m%d%H%M%S")

@@ -42,7 +42,7 @@ jobs:
           sf sgd source delta --from $(git describe --match "qa-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "qa-*" --abbrev=0 --tags HEAD)---"
           cat package/package.xml
-          sf project deploy start --manifest package/package.xml
+          sf project deploy start --ignore-conflicts --manifest package/package.xml
       - name: create tag
         run: |
           git tag qa-$(date +"%Y%m%d%H%M%S")
@@ -72,4 +72,4 @@ jobs:
           sf sgd source delta --from $(git describe --match "uat-*" --abbrev=0 --tags HEAD) --to HEAD --output . --ignore .forceignore
           echo "--- package.xml generated with added and modified metadata from $(git describe --match "uat-*" --abbrev=0 --tags HEAD)---"
           cat package/package.xml
-          sf project deploy start --manifest package/package.xml --dry-run
+          sf project deploy start --ignore-conflicts --manifest package/package.xml --dry-run
