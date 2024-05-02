@@ -3,4 +3,5 @@ public with sharing class AccountController {
     // A comment..
     // How about another comment?
     // SE onsite comment
+    // Some random comment
 }
